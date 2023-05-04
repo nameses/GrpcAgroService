@@ -4,47 +4,41 @@ option csharp_namespace = "GrpcAgroService";
 
 package greet;
 
-// The greeting service definition.
-service Greeter {
-  // Sends a greeting
+service AgroField {
   rpc GetInfoByName (InfoAgrofieldRequest) returns (InfoAgrofieldReply);
 }
 
-// The request message containing the user's name.
 message InfoAgrofieldRequest {
-  int32 name = 1;
+  string name = 1;
 }
 
-// The response message containing the greetings.
 message InfoAgrofieldReply {
-  string name = 1;
-  int32 aria = 2;
-  int32 bal = 3;
-  int32 pH = 4;
-  int32 gumus = 5;
-  int32 azot = 6;
-  int32 phosfor = 7;
-  int32 kaliy = 8;
-  int32 manganese = 9;
-  int32 cobalt = 10;
-  int32 copper = 11;
-  int32 zinc = 12;
-  int32 lead = 13;
-  int32 cesium = 14;
-  string strontium = 15;
+	bool success = 1;
+	string name = 2;
+	double aria = 3;
+	int32 bal = 4;
+	double pH = 5;
+	double gumus = 6;
+	double azot = 7;
+	double phosfor = 8;
+	double kaliy = 9;
+	double manganese = 10;
+	double cobalt = 11;
+	double copper = 12;
+	double zinc = 13;
+	double lead = 14;
+	double cesium = 15;
+	string strontium = 16;
 }
 
 service CsvConverter {
-  // Sends a greeting
   rpc ConvertCsv (CsvConverterRequest) returns (CsvConverterReply);
 }
 
-// The request message containing the user's name.
 message CsvConverterRequest {
   string CsvFilePath = 1;
 }
 
-// The response message containing the greetings.
 message CsvConverterReply {
   bool Success = 1;
 }

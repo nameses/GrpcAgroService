@@ -10,10 +10,13 @@ namespace GrpcAgroService.Services
     public class CsvConverterService : CsvConverter.CsvConverterBase
     {
         private readonly ServerDbContext _dbContext;
+        private readonly ILogger<AgroFieldService> _logger;
 
-        public CsvConverterService(ServerDbContext dbContext)
+        public CsvConverterService(ServerDbContext dbContext,
+            ILogger<AgroFieldService> logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
         }
 
         public override Task<CsvConverterReply> ConvertCsv(CsvConverterRequest request, ServerCallContext context)
@@ -22,8 +25,14 @@ namespace GrpcAgroService.Services
             var inputModels = common.CsvHelper.ReadCsvData(request.CsvFilePath);
             var entities = inputModels.Select(model => InputModel.ConvertToAgroFieldModel(model)).ToList();
 
-            // Save the entities to the database using Entity Framework
-            _dbContext.AgroFields.AddRange(entities);
+            // Save or update entities
+            foreach (var field in entities)
+            {
+                var existingField = _dbContext.AgroFields.FindAsync(field.Name).Result;
+                if (existingField != null)
+                    existingField = field;
+                else _dbContext.AgroFields.Add(field);
+            }
             _dbContext.SaveChanges();
 
             // Return a response indicating success
