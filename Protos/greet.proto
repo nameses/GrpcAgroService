@@ -4,6 +4,29 @@ option csharp_namespace = "GrpcAgroService";
 
 package greet;
 
+//enum of fields of csv file or db
+
+
+//requests' data
+message InfoAgrofieldData {
+	string name = 1;
+	double aria = 2;
+	int32 bal = 3;
+	double pH = 4;
+	double gumus = 5;
+	double azot = 6;
+	double phosfor = 7;
+	double kaliy = 8;
+	double manganese = 9;
+	double cobalt = 10;
+	double copper = 11;
+	double zinc = 12;
+	double lead = 13;
+	double cesium = 14;
+	string strontium = 15;
+}
+
+//service that shows info by name of field
 service AgroField {
   rpc GetInfoByName (InfoAgrofieldRequest) returns (InfoAgrofieldReply);
 }
@@ -14,23 +37,34 @@ message InfoAgrofieldRequest {
 
 message InfoAgrofieldReply {
 	bool success = 1;
-	string name = 2;
-	double aria = 3;
-	int32 bal = 4;
-	double pH = 5;
-	double gumus = 6;
-	double azot = 7;
-	double phosfor = 8;
-	double kaliy = 9;
-	double manganese = 10;
-	double cobalt = 11;
-	double copper = 12;
-	double zinc = 13;
-	double lead = 14;
-	double cesium = 15;
-	string strontium = 16;
+	InfoAgrofieldData data = 2;
 }
 
+//service that shows info about all fields
+service AllAgroField {
+  rpc GetInfoByName (InfoAllAgrofieldRequest) returns (InfoAllAgrofieldReply);
+}
+
+message InfoAllAgrofieldRequest {
+}
+
+message InfoAllAgrofieldReply {
+	bool success = 1;
+	repeated InfoAgrofieldData data = 2;
+}
+
+//service that shows info about multiple fields by filtering data
+service AgroFieldByFilter{
+	rpc GetAgroFieldsByFilter(AgroFieldByFilterRequest) returns (InfoAllAgrofieldReply);
+}
+
+message AgroFieldByFilterRequest {
+  string field = 1;
+  double min = 2;
+  double max = 3;
+}
+
+//service that convert from csv to db
 service CsvConverter {
   rpc ConvertCsv (CsvConverterRequest) returns (CsvConverterReply);
 }

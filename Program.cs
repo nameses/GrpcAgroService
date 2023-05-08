@@ -1,3 +1,4 @@
+using GrpcAgroService;
 using GrpcAgroService.Data;
 using GrpcAgroService.Services;
 
@@ -13,6 +14,8 @@ builder.Services.AddDbContext<ServerDbContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.MapGrpcService<AgroFieldByFilterService>();
+app.MapGrpcService<AllAgroFieldService>();
 app.MapGrpcService<AgroFieldService>();
 app.MapGrpcService<CsvConverterService>();
 

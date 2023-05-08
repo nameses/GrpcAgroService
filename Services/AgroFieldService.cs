@@ -30,20 +30,23 @@ namespace GrpcAgroService.Services
             return Task.FromResult(new InfoAgrofieldReply
             {
                 Success = true,
-                Name = entity.Name,
-                Aria = entity.Aria,
-                Bal = entity.Bal,
-                PH = entity.PH,
-                Azot = entity.Azot,
-                Phosfor = entity.Phosfor,
-                Kaliy = entity.Kaliy,
-                Manganese = entity.Manganese,
-                Cobalt = entity.Cobalt,
-                Copper = entity.Copper,
-                Zinc = entity.Zinc,
-                Lead = entity.Lead,
-                Cesium = entity.Cesium,
-                Strontium = entity.StrontiumMin + "-" + entity.StrontiumMax
+                Data = new InfoAgrofieldData()
+                {
+                    Name = entity.Name,
+                    Aria = entity.Aria,
+                    Bal = entity.Bal,
+                    PH = entity.PH,
+                    Azot = entity.Azot,
+                    Phosfor = entity.Phosfor,
+                    Kaliy = entity.Kaliy,
+                    Manganese = entity.Manganese,
+                    Cobalt = entity.Cobalt,
+                    Copper = entity.Copper,
+                    Zinc = entity.Zinc,
+                    Lead = entity.Lead,
+                    Cesium = entity.Cesium,
+                    Strontium = entity.StrontiumMin + "-" + entity.StrontiumMax
+                }
             });
         }
     }
