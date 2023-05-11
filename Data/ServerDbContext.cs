@@ -12,7 +12,7 @@ namespace GrpcAgroService.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=AgroFieldDb;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=NAMESES;Database=AgroFieldDb;Trusted_Connection=True;TrustServerCertificate=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

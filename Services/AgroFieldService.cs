@@ -24,7 +24,7 @@ namespace GrpcAgroService.Services
                 return Task.FromResult(new InfoAgrofieldReply
                 {
                     Success = false
-                }); ;
+                });
             }
 
             return Task.FromResult(new InfoAgrofieldReply

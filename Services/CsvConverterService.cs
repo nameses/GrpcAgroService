@@ -28,7 +28,9 @@ namespace GrpcAgroService.Services
             // Save or update entities
             foreach (var field in entities)
             {
-                var existingField = _dbContext.AgroFields.FindAsync(field.Name).Result;
+                AgroFieldModel existingField = null;
+                if (_dbContext.AgroFields.Any())
+                    existingField = _dbContext.AgroFields.FindAsync(field.Name).Result;
                 if (existingField != null)
                     existingField = field;
                 else _dbContext.AgroFields.Add(field);
